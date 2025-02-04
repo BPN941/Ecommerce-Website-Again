@@ -1,38 +1,37 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include('../connection.php'); // Ensure DB connection is included
 
 if(isset($_SESSION['auth']))
 {
-    if(isset($_SESSION['loggedInUserRole'])){
+    if(isset($_SESSION['role']) && isset($_SESSION['email'])) { // Use correct session keys
 
-        $role=validate($_SESSION['loggedInUserRole']);
-        $email=validate($_SESSION['loggedInUser']['email']);
+        $role = validate($_SESSION['role']); 
+        $email = validate($_SESSION['email']); 
 
-        $query="SELECT * FROM users WHERE email='$email' AND role='$role' LIMIT 1";
-        $result=mysqli_query($conn,$query);
-        if($result){
+        // Use prepared statements to prevent SQL injection
+        $query = "SELECT * FROM users WHERE email = ? AND role = ? LIMIT 1";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ss", $email, $role);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-            if(mysqli_num_rows($result)==0){
-
+        if($result && $result->num_rows > 0){
+            $row = $result->fetch_assoc();
+            if($row['role'] !== 'admin'){
                 logoutSession();
                 redirect('../login.php','Access Denied');
             }
-            else
-            {
-                $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-                if($row['role'] != 'admin'){
-                    logoutSession();
-                    redirect('../login.php','Access Denied');
-                }
-            }
-        }else{
-
+        } else {
             logoutSession();
-            redirect('../login.php','Something Went Wrong');
+            redirect('../login.php','Access Denied');
         }
-
+    } else {
+        redirect('../login.php','Invalid Session Data');
     }
-}else{
+} else {
     redirect('../login.php','Login to continue');
 }
-
 ?>

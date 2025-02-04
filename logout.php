@@ -1,8 +1,9 @@
 <?php
 session_start();
-session_unset();  // Unset all session variables
-session_destroy(); // Destroy the session
+session_unset();
+session_destroy();
 
+// Ensure cookies are cleared
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(session_name(), '', time() - 42000,
@@ -11,7 +12,6 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-// Redirect to the login page
+// Redirect to login page
 header("Location: login.php");
 exit();
-?>
