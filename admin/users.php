@@ -19,7 +19,6 @@
                                 <th>Id</th>
                                 <th>Username</th>
                                 <th>Email</th>
-                                <th>Phone</th>
                                 <th>Role</th>
                                 <th>Action</th>
                             </tr>
@@ -37,7 +36,6 @@
                                         <td><?= $userItem['id']; ?></td>
                                         <td><?= $userItem['username']; ?></td>
                                         <td><?= $userItem['email']; ?></td>
-                                        <td><?= $userItem['phone']; ?></td>
                                         <td><?= $userItem['role']; ?></td>
                                         <td>
                                             <a href="users-edit.php?id=<?= $userItem['id']; ?>" class="btn btn-success btn-sm">Edit</a>

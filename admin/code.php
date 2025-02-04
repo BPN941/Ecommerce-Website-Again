@@ -5,15 +5,14 @@ require '../config/function.php';
 if(isset($_POST['saveUser']))
 {
     $name = validate($_POST['username']);
-    $phone = validate($_POST['phone']);
     $email = validate($_POST['email']);
     $password = validate($_POST['password']);
     $role = validate($_POST['role']);
 
-    if($name != '' || $email != '' || $phone != '' || $password !='')
+    if($name != '' || $email != '' || $password !='')
     {
-        $query = "INSERT INTO users (username,phone,email,password) 
-                VALUES ('$name','$phone','$email','$password','$role')";
+        $query = "INSERT INTO users (username,email,password,role) 
+                VALUES ('$name','$email','$password','$role')";
         $result = mysqli_query($conn, $query);
 
         if($result){
@@ -32,7 +31,6 @@ if(isset($_POST['saveUser']))
 if(isset($_POST['updateUser']))
 {
     $name = validate($_POST['username']);
-    $phone = validate($_POST['phone']);
     $email = validate($_POST['email']);
     $password = validate($_POST['password']);
     $role = validate($_POST['role']);
@@ -44,11 +42,10 @@ if(isset($_POST['updateUser']))
         redirect('users-edit.php?id='.$userId,'No such id found');
     }
 
-    if($name != '' || $email != '' || $phone != '' || $password !='')
+    if($name != '' || $email != '' || $password !='')
     {
         $query = "UPDATE users SET 
                 username = '$name' ,
-                phone = '$phone',
                 email = '$email',
                 password = '$password',
                 role = '$role'
@@ -102,4 +99,59 @@ if(isset($_POST['saveSetting']))
     }
 
 }
+
+// ADD CATEGORY
+if(isset($_POST['saveCategory']))
+{
+    $category_name = validate($_POST['category_name']);
+
+    if(!empty($category_name))
+    {
+        $query = "INSERT INTO categories (name) VALUES ('$category_name')";
+        $result = mysqli_query($conn, $query);
+
+        if($result){
+            redirect('categories.php', 'Category Added Successfully');
+        } else {
+            redirect('categories-create.php', 'Something Went Wrong');
+        }
+    }
+    else
+    {
+        redirect('categories-create.php', 'Please enter a category name');
+    }
+}
+
+// ADD PRODUCT
+if(isset($_POST['saveProduct']))
+{
+    $category_id = validate($_POST['category_id']);
+    $name = validate($_POST['product_name']);
+    $description = validate($_POST['product_description']);
+    $price = validate($_POST['product_price']);
+    $image = $_FILES['product_image']['name'];
+
+    if(!empty($category_id) && !empty($name) && !empty($description) && !empty($price) && !empty($image))
+    {
+        $target_dir = "../uploads/";
+        $target_file = $target_dir . basename($image);
+        move_uploaded_file($_FILES["product_image"]["tmp_name"], $target_file);
+
+        $query = "INSERT INTO products (category_id, name, description, price, image) 
+                  VALUES ('$category_id', '$name', '$description', '$price', '$image')";
+        $result = mysqli_query($conn, $query);
+
+        if($result){
+            redirect('products.php', 'Product Added Successfully');
+        } else {
+            redirect('products-create.php', 'Something Went Wrong');
+        }
+    }
+    else
+    {
+        redirect('products-create.php', 'Please fill all fields');
+    }
+}
+
+
 ?>

@@ -159,7 +159,6 @@ $default_profile_picture = "images/default_profile.png";
         </div>
         <nav>
         <a href="homepage.php">Home</a>
-        <a href="#">Shop</a>
         <div class="dropdown">
             <span class="dropbtn">Categories</span>
             <div class="dropdown-content">

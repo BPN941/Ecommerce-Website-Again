@@ -38,12 +38,6 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label>Phone No.</label>
-                                        <input type="text" name="phone" value="<?= $user['data']['phone']; ?>" required class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
                                         <label>Email</label>
                                         <input type="email" name="email" value="<?= $user['data']['email']; ?>" required class="form-control">
                                     </div>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('connection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,28 +17,21 @@ session_start();
         </div>
         <nav>
         <a href="homepage.php">Home</a>
-        <a href="#">Shop</a>
         <div class="dropdown">
-            <span class="dropbtn">Categories</span>
-            <div class="dropdown-content">
-                <!-- Nested Dropdown for Upper -->
-                <div class="nested-dropdown">
-                    <span class="nested-btn">Upper</span>
-                </div>
-                <!-- Nested Dropdown for Bottom -->
-                <div class="nested-dropdown">
-                    <span class="nested-btn">Bottom</span>
-                </div>
-                <!-- Nested Dropdown for Footwear -->
-                <div class="nested-dropdown">
-                    <span class="nested-btn">Footwear</span>
-                </div>
-                <!-- Nested Dropdown for Accessories -->
-                <div class="nested-dropdown">
-                <span class="nested-btn">Accessories</span>
-                </div>
-            </div>
-        </div>
+    <span class="dropbtn">Categories</span>
+    <div class="dropdown-content">
+        <?php
+        include('connection.php');
+        $query = "SELECT * FROM categories";
+        $categories = mysqli_query($conn, $query);
+
+        while ($cat = mysqli_fetch_assoc($categories)) {
+            echo '<a href="categories.php?category=' . $cat['id'] . '">' . $cat['name'] . '</a>';
+        }
+        ?>
+    </div>
+</div>
+
         <a href="#">Cart</a>
         <a href="aboutus_contactus.php">Contact Us</a>
         <a href="account.php">Account</a>
