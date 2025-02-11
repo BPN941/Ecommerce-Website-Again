@@ -1,5 +1,5 @@
 <?php
-require '../config/function.php';
+require_once '../config/function.php';
 
 include('authentication.php');
 ?>

@@ -1,38 +1,30 @@
 <?php 
 session_start();
 
-require '../connection.php';
+require_once '../connection.php';
 
 function validate($inputData){
-
     global $conn;
-
-    $validatedData =  mysqli_real_escape_string($conn,$inputData);
+    $validatedData = mysqli_real_escape_string($conn, $inputData);
     return trim($validatedData);
 }
 
 function logoutSession(){
-
     unset($_SESSION['auth']);
     unset($_SESSION['loggedInUserRole']);
     unset($_SESSION['loggedInUser']);
 }
 
-function redirect($url,$status)
-{
-    $_SESSION['status']=$status;
-    header('Location: '.$url);
+function redirect($url, $status){
+    $_SESSION['status'] = $status;
+    header('Location: ' . $url);
     exit(0);
 }
 
-function alertMessage()
-{
-    if(isset($_SESSION['status']))
-    {
-        echo '<div class="alert alert-success">
-            <h6>'.$_SESSION['status'].'</h6>
-        </div>';
-        unset($_SESSION['status']);
+function alertMessage(){
+    if(isset($_SESSION['status'])){
+        echo "<script>alert('" . htmlspecialchars($_SESSION['status']) . "');</script>";
+        unset($_SESSION['status']); // Clear the message after showing it
     }
 }
 
