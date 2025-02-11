@@ -16,26 +16,24 @@ include('connection.php');
             <img src="images/Chad_logo2.png" alt="Logo" class="logo-img">
         </div>
         <nav>
-        <a href="homepage.php">Home</a>
-        <div class="dropdown">
-    <span class="dropbtn">Categories</span>
-    <div class="dropdown-content">
-        <?php
-        include('connection.php');
-        $query = "SELECT * FROM categories";
-        $categories = mysqli_query($conn, $query);
+            <a href="homepage.php">Home</a>
+            <div class="dropdown">
+                <span class="dropbtn">Categories</span>
+                <div class="dropdown-content">
+                    <?php
+                    $query = "SELECT * FROM categories";
+                    $categories = mysqli_query($conn, $query);
 
-        while ($cat = mysqli_fetch_assoc($categories)) {
-            echo '<a href="categories.php?category=' . $cat['id'] . '">' . $cat['name'] . '</a>';
-        }
-        ?>
-    </div>
-</div>
-
-        <a href="#">Cart</a>
-        <a href="aboutus_contactus.php">Contact Us</a>
-        <a href="account.php">Account</a>
-    </nav>
+                    while ($cat = mysqli_fetch_assoc($categories)) {
+                        echo '<a href="categories.php?category_id=' . htmlspecialchars($cat['id']) . '">' . htmlspecialchars($cat['name']) . '</a>';
+                    }
+                    ?>
+                </div>
+            </div>
+            <a href="#">Cart</a>
+            <a href="aboutus_contactus.php">Contact Us</a>
+            <a href="account.php">Account</a>
+        </nav>
     </header>
 
     <section class="hero">

@@ -11,7 +11,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 .container {
@@ -19,11 +20,12 @@ body {
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  width: 360px;
+  width: 80%;
+  max-width: 1200px;
   text-align: center;
 }
 
-h1 {
+h1, h2 {
   font-size: 1.8rem;
   margin-bottom: 10px;
   color: #000;
@@ -35,74 +37,100 @@ p {
   margin-bottom: 1.5rem;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
+.hero-content {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-label {
-  font-size: 0.9rem;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-input {
-  padding: 10px;
+.hero-content h1 {
+  font-size: 2.5rem;
   margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 0.9rem;
 }
 
-.options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  font-size: 0.8rem;
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
-.options input {
-  margin-right: 5px;
-}
-
-.forgot-password {
-  text-decoration: none;
-  color: #007bff;
-}
-
-.forgot-password:hover {
-  text-decoration: underline;
-}
-
-.sign-in-btn {
-  background-color: #f85a5a;
-  color: #ffffff;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
+.hero-content button {
+  padding: 10px 20px;
   font-size: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 1rem;
 }
 
-.sign-in-btn:hover {
-  background-color: #e04b4b;
+.hero-content button:hover {
+  background-color: #0056b3;
 }
 
-.signup-text {
-  margin-top: 1rem;
-  font-size: 0.85rem;
+.products-title {
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+
+.products, .product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.product {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  width: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product img {
+  max-width: 100%;
+  height: auto;
+  max-height: 150px; /* Set a maximum height for the images */
+  margin-bottom: 10px;
+  object-fit: cover; /* Ensure the image fits within the container */
+}
+
+.product h3 {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.product p {
+  font-size: 16px;
   color: #666;
 }
 
-.signup-link {
+.product button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product button:hover {
+  background-color: #0056b3;
+}
+
+.product a.view-details {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
   text-decoration: none;
-  color: #007bff;
+  border-radius: 5px;
 }
 
-.signup-link:hover {
-  text-decoration: underline;
+.product a.view-details:hover {
+  background-color: #0056b3;
 }
-
