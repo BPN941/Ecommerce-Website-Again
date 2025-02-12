@@ -14,14 +14,20 @@ $product_data = mysqli_fetch_assoc($product);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo $product_data['name']; ?> - Details</title>
+    <title><?php echo htmlspecialchars($product_data['name']); ?> - Details</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
 </head>
 <body>
 
-<h2><?php echo $product_data['name']; ?></h2>
-<p>Price: $<?php echo $product_data['price']; ?></p>
-<p>Description: <?php echo $product_data['description']; ?></p>
-<a href="cart.php?add=<?php echo $product_data['id']; ?>">Add to Cart</a>
+<div class="container">
+    <div class="product-details">
+        <h2><?php echo htmlspecialchars($product_data['name']); ?></h2>
+        <img src="<?php echo htmlspecialchars($product_data['image']); ?>" alt="<?php echo htmlspecialchars($product_data['name']); ?>" class="product-image">
+        <p>Price: $<?php echo htmlspecialchars($product_data['price']); ?></p>
+        <p>Description: <?php echo htmlspecialchars($product_data['description']); ?></p>
+        <a href="cart.php?add=<?php echo htmlspecialchars($product_data['id']); ?>" class="btn">Add to Cart</a>
+    </div>
+</div>
 
 </body>
 </html>

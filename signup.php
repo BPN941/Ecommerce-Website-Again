@@ -35,6 +35,11 @@ if (isset($_SESSION['email'])) {
                 <input type="password" id="passw" name="passw" placeholder="Re-enter your password" required>
             
                 <button type="submit" class="signup-btn">Sign Up</button>
+            
+                <!-- Signin Link -->
+                <p class="signin-link">
+                    Already have an account? <a href="login.php" class="signin-link">Login Please!</a>
+                </p>
             </form>
             
         </div>

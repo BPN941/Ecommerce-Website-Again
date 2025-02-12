@@ -2,7 +2,6 @@
 // Check if the registration success message should be shown
 $registrationSuccess = isset($_GET['registration']) && $_GET['registration'] == 'success';
 
-
 session_start();
 
 // Check if the user is logged in
@@ -10,9 +9,6 @@ if (isset($_SESSION['email'])) {
     header("Location: homepage.php");
     exit();
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -20,8 +16,8 @@ if (isset($_SESSION['email'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css"> <!-- Link to the login-specific CSS file -->
     <style>
         /* Add some styles for the success message */
         .success-message {
