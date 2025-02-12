@@ -23,7 +23,7 @@ $product_data = mysqli_fetch_assoc($product);
     <div class="product-details">
         <h2><?php echo htmlspecialchars($product_data['name']); ?></h2>
         <img src="<?php echo htmlspecialchars($product_data['image']); ?>" alt="<?php echo htmlspecialchars($product_data['name']); ?>" class="product-image">
-        <p>Price: $<?php echo htmlspecialchars($product_data['price']); ?></p>
+        <p>Price: Rs <?php echo htmlspecialchars($product_data['price']); ?></p>
         <p>Description: <?php echo htmlspecialchars($product_data['description']); ?></p>
         <a href="cart.php?add=<?php echo htmlspecialchars($product_data['id']); ?>" class="btn">Add to Cart</a>
     </div>

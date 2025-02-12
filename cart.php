@@ -18,7 +18,7 @@ if (isset($_POST['addToCart'])) {
 echo "<h2>Shopping Cart</h2>";
 if (!empty($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $item) {
-        echo "Product ID: " . $item['product_id'] . " - Price: $" . $item['price'] . "<br>";
+        echo "Product ID: " . $item['product_id'] . " - Price: Rs " . $item['price'] . "<br>";
     }
     echo '<a href="checkout.php">Proceed to Checkout</a>';
 } else {

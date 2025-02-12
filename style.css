@@ -8,13 +8,132 @@
 
 body {
   background-color: #f7f7f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
+  display: flex;
   flex-direction: column;
+  align-items: center; /* Center only the container, not the entire body */
 }
 
+header {
+  background-color: #f4f4f4;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  width: 100%; /* Ensure the header takes the full width */
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+nav a, .dropbtn {
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+/* Dropdown Container */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+/* Nested Dropdown */
+.nested-dropdown {
+  position: relative;
+}
+
+.nested-btn {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  cursor: pointer;
+}
+
+.nested-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.nested-dropdown-content {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: #f9f9f9;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.nested-dropdown:hover .nested-dropdown-content {
+  display: block;
+}
+
+.nested-dropdown-content a {
+  padding: 10px 15px;
+}
+
+.nested-dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  nav {
+      flex-wrap: wrap;
+  }
+
+  .dropdown-content, .nested-dropdown-content {
+      min-width: 100px;
+  }
+}
+
+
+/* Style the logo image */
+.logo-img {
+width: 100px; /* Adjust the width as per your requirement */
+height: auto; /* Keep the aspect ratio */
+}
+
+header nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+}
 .container {
   background-color: #ffffff;
   padding: 2rem;

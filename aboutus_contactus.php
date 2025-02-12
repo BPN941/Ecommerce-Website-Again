@@ -15,32 +15,25 @@ session_start();
             <img src="images/Chad_logo2.png" alt="Logo" class="logo-img">
         </div>
         <nav>
-        <a href="homepage.php">Home</a>
-        <div class="dropdown">
-            <span class="dropbtn">Categories</span>
-            <div class="dropdown-content">
-                <!-- Nested Dropdown for Upper -->
-                <div class="nested-dropdown">
-                    <span class="nested-btn">Upper</span>
-                </div>
-                <!-- Nested Dropdown for Bottom -->
-                <div class="nested-dropdown">
-                    <span class="nested-btn">Bottom</span>
-                </div>
-                <!-- Nested Dropdown for Footwear -->
-                <div class="nested-dropdown">
-                    <span class="nested-btn">Footwear</span>
-                </div>
-                <!-- Nested Dropdown for Accessories -->
-                <div class="nested-dropdown">
-                <span class="nested-btn">Accessories</span>
+            <a href="homepage.php">Home</a>
+            <div class="dropdown">
+                <span class="dropbtn">Categories</span>
+                <div class="dropdown-content">
+                    <?php
+                    include('connection.php');
+                    $query = "SELECT * FROM categories";
+                    $categories = mysqli_query($conn, $query);
+
+                    while ($cat = mysqli_fetch_assoc($categories)) {
+                        echo '<a href="categories.php?category_id=' . htmlspecialchars($cat['id']) . '">' . htmlspecialchars($cat['name']) . '</a>';
+                    }
+                    ?>
                 </div>
             </div>
-        </div>
-        <a href="#">Cart</a>
-        <a href="aboutus_contactus.php">Contact Us</a>
-        <a href="account.php">Account</a>
-    </nav>
+            <a href="#">Cart</a>
+            <a href="aboutus_contactus.php">Contact Us</a>
+            <a href="account.php">Account</a>
+        </nav>
     </header>
 
     <section class="about-us">
@@ -85,7 +78,7 @@ session_start();
     </section>
 
     <footer>
-        <p>&copy; 2024 E-commerce Website Chad Wears. All rights reserved. | <a href="#">About Us</a> | <a href="#">Privacy Policy</a></p>
+        <p>&copy; 2024 E-commerce Website Chad Wears. All rights reserved. | <a href="aboutus_contactus.php">About Us</a> | <a href="#">Privacy Policy</a></p>
     </footer>
 
 </body>

@@ -44,6 +44,31 @@ if (!$category_data) {
 </head>
 <body>
 
+<header>
+        <div class="logo">
+            <img src="images/Chad_logo2.png" alt="Logo" class="logo-img">
+        </div>
+        <nav>
+            <a href="homepage.php">Home</a>
+            <div class="dropdown">
+                <span class="dropbtn">Categories</span>
+                <div class="dropdown-content">
+                    <?php
+                    $query = "SELECT * FROM categories";
+                    $categories = mysqli_query($conn, $query);
+
+                    while ($cat = mysqli_fetch_assoc($categories)) {
+                        echo '<a href="categories.php?category_id=' . htmlspecialchars($cat['id']) . '">' . htmlspecialchars($cat['name']) . '</a>';
+                    }
+                    ?>
+                </div>
+            </div>
+            <a href="#">Cart</a>
+            <a href="aboutus_contactus.php">Contact Us</a>
+            <a href="account.php">Account</a>
+        </nav>
+    </header>
+
 <div class="container">
     <h2><?php echo htmlspecialchars($category_name); ?> Products</h2>
 
@@ -52,7 +77,7 @@ if (!$category_data) {
             <div class="product">
                 <img src="<?php echo htmlspecialchars($row['image']); ?>" alt="<?php echo htmlspecialchars($row['name']); ?>" class="product-image">
                 <h3><?php echo htmlspecialchars($row['name']); ?></h3>
-                <p>Price: $<?php echo htmlspecialchars($row['price']); ?></p>
+                <p>Price: Rs <?php echo htmlspecialchars($row['price']); ?></p>
                 <a href="product-details.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="view-details">View Details</a>
             </div>
         <?php } ?>

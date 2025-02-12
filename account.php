@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('connection.php');
 
 // Check if the user is logged in
 if (!isset($_SESSION['email'])) {
@@ -99,7 +100,7 @@ $default_profile_picture = "images/default_profile.png";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account</title>
+    <title>Account - Chad Wears Website</title>
     <link rel="stylesheet" href="homepage.css">
     <style>
 
@@ -162,22 +163,14 @@ $default_profile_picture = "images/default_profile.png";
         <div class="dropdown">
             <span class="dropbtn">Categories</span>
             <div class="dropdown-content">
-                <!-- Nested Dropdown for Upper -->
-                <div class="nested-dropdown">
-                    <span class="nested-btn">Upper</span>
-                </div>
-                <!-- Nested Dropdown for Bottom -->
-                <div class="nested-dropdown">
-                    <span class="nested-btn">Bottom</span>
-                </div>
-                <!-- Nested Dropdown for Footwear -->
-                <div class="nested-dropdown">
-                    <span class="nested-btn">Footwear</span>
-                </div>
-                <!-- Nested Dropdown for Accessories -->
-                <div class="nested-dropdown">
-                <span class="nested-btn">Accessories</span>
-                </div>
+                <?php
+                $query = "SELECT * FROM categories";
+                $categories = mysqli_query($conn, $query);
+
+                while ($cat = mysqli_fetch_assoc($categories)) {
+                    echo '<a href="categories.php?category_id=' . htmlspecialchars($cat['id']) . '">' . htmlspecialchars($cat['name']) . '</a>';
+                }
+                ?>
             </div>
         </div>
         <a href="#">Cart</a>
@@ -200,8 +193,10 @@ $default_profile_picture = "images/default_profile.png";
             <form action="logout.php" method="POST" style="margin: 0;">
             <button type="submit">Logout</button>
             </form>
-            <a href="change_password.php">Change Password</a>
+            <p>If you want to modify your details, please contact us.</p>
+            <a href="aboutus_contactus.php" class="btn">Contact Us</a>
         </div>
+
     </div>
 
     <footer>

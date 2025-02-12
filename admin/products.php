@@ -55,7 +55,7 @@ if (!$products) {
             <div class="product-item">
                 <h3><?= htmlspecialchars($product['name']) ?></h3>
                 <p><?= htmlspecialchars($product['description']) ?></p>
-                <p>Price: $<?= htmlspecialchars($product['price']) ?></p>
+                <p>Price: Rs <?= htmlspecialchars($product['price']) ?></p>
                 <img src="../<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" width="100">
                 <?php if ($isAdmin) { ?>
                     <form action="delete_product.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
