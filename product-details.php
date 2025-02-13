@@ -25,7 +25,11 @@ $product_data = mysqli_fetch_assoc($product);
         <img src="<?php echo htmlspecialchars($product_data['image']); ?>" alt="<?php echo htmlspecialchars($product_data['name']); ?>" class="product-image">
         <p>Price: Rs <?php echo htmlspecialchars($product_data['price']); ?></p>
         <p>Description: <?php echo htmlspecialchars($product_data['description']); ?></p>
-        <a href="cart.php?add=<?php echo htmlspecialchars($product_data['id']); ?>" class="btn">Add to Cart</a>
+        <form action="cart.php" method="POST">
+            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product_data['id']); ?>">
+            <input type="hidden" name="price" value="<?php echo htmlspecialchars($product_data['price']); ?>">
+            <button type="submit" name="addToCart">Add to Cart</button>
+        </form>
     </div>
 </div>
 

@@ -30,7 +30,7 @@ session_start();
                     ?>
                 </div>
             </div>
-            <a href="#">Cart</a>
+            <a href="cart.php">Cart</a>
             <a href="aboutus_contactus.php">Contact Us</a>
             <a href="account.php">Account</a>
         </nav>

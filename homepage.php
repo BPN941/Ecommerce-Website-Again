@@ -30,7 +30,7 @@ include('connection.php');
                     ?>
                 </div>
             </div>
-            <a href="#">Cart</a>
+            <a href="cart.php">Cart</a>
             <a href="aboutus_contactus.php">Contact Us</a>
             <a href="account.php">Account</a>
         </nav>
@@ -69,59 +69,59 @@ include('connection.php');
         <div class="hero-content">
             <h1>Welcome to Our Store</h1>
             <p>Discover amazing products at unbeatable prices.</p>
-            <button>Shop Now</button>
+            <button id="shop-now-btn">Shop Now</button>
         </div>
     </section>
     
     <h2 class="products-title">Our Most Loved Products</h2>
-    <section class="products">
+    <section id="products" class="products">
     <div>
         <div class="product">
-            <img src="images/product/tshirt/plain_white_tshirt.webp" alt="Product Image">
+            <img src="images/product/tshirt/f9fc49aaf96fb9b232671e3a2b85d2a8.jpg" alt="Product Image">
             <h3>Plain White T-shirt</h3>
             <p>Rs 1200</p>
             <button>Add to Cart</button>
         </div>
         <div class="product">
-            <img src="images/product/pants/plain_black_pant.webp" alt="Product Image">
-            <h3>Plain Black Pant</h3>
-            <p>Rs 1600</p>
+            <img src="images/product/tshirt/tshirt.png" alt="Product Image">
+            <h3>Plain White T-shirt</h3>
+            <p>Rs 3000</p>
             <button>Add to Cart</button>
         </div>
         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product Image">
-            <h3>Product Title</h3>
-            <p>$59.99</p>
+            <img src="images/product/pants/black baggy jeans.png" alt="Product Image">
+            <h3>Black Jeans</h3>
+            <p>Rs 2100</p>
             <button>Add to Cart</button>
         </div>
         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product Image">
-            <h3>Product Title</h3>
-            <p>$59.99</p>
+            <img src="images/product/pants/blue baggy jeans.png" alt="Product Image">
+            <h3>Blue Jeans</h3>
+            <p>Rs 2100</p>
             <button>Add to Cart</button>
         </div>
         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product Image">
+            <img src="images/product/footware/white nike plain.png" alt="Product Image">
             <h3>Product Title</h3>
-            <p>$59.99</p>
+            <p>Rs 6000</p>
             <button>Add to Cart</button>
         </div>
         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product Image">
-            <h3>Product Title</h3>
-            <p>$59.99</p>
+            <img src="images/product/tshirt/022215a0381a58204494dad100fc461c.jpg" alt="Product Image">
+            <h3>Brown Puffer Jacket</h3>
+            <p>Rs 3500</p>
             <button>Add to Cart</button>
         </div>
         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product Image">
+            <img src="images/product/accessories/silver chain bracelet.png" alt="Product Image">
             <h3>Product Title</h3>
-            <p>$59.99</p>
+            <p>Rs 3000</p>
             <button>Add to Cart</button>
         </div>
         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product Image">
+            <img src="images/product/accessories/vlack ring.png" alt="Product Image">
             <h3>Product Title</h3>
-            <p>$59.99</p>
+            <p>Rs 500</p>
             <button>Add to Cart</button>
         </div>
     </div>
@@ -133,6 +133,11 @@ include('connection.php');
     </footer>
 
     <script>
+
+        document.getElementById('shop-now-btn').addEventListener('click', function() {
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        });
+
         let slideIndex = 1;
         showSlides(slideIndex);
 

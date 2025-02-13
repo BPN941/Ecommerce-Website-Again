@@ -142,6 +142,47 @@ header nav a {
   width: 80%;
   max-width: 1200px;
   text-align: center;
+  flex: 1; /* Allow the container to grow and fill the available space */
+}
+
+footer {
+  background-color: #f4f4f4;
+  padding: 10px 0;
+  text-align: center;
+  width: 100%; /* Ensure the footer takes the full width */
+  border-top: 1px solid #ddd;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 
 h1, h2 {
