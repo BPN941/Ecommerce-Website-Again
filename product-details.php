@@ -28,6 +28,8 @@ $product_data = mysqli_fetch_assoc($product);
         <form action="cart.php" method="POST">
             <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product_data['id']); ?>">
             <input type="hidden" name="price" value="<?php echo htmlspecialchars($product_data['price']); ?>">
+            <input type="hidden" name="image" value="<?php echo htmlspecialchars($product_data['image']); ?>">
+            <input type="hidden" name="name" value="<?php echo htmlspecialchars($product_data['name']); ?>">
             <button type="submit" name="addToCart">Add to Cart</button>
         </form>
     </div>
