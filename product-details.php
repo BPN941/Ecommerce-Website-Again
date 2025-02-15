@@ -18,6 +18,31 @@ $product_data = mysqli_fetch_assoc($product);
     <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
 </head>
 <body>
+<header>
+        <div class="logo">
+            <img src="images/Chad_logo2.png" alt="Logo" class="logo-img">
+        </div>
+        <nav>
+            <a href="homepage.php">Home</a>
+            <div class="dropdown">
+                <span class="dropbtn">Categories</span>
+                <div class="dropdown-content">
+                    <?php
+                    include('connection.php');
+                    $query = "SELECT * FROM categories";
+                    $categories = mysqli_query($conn, $query);
+
+                    while ($cat = mysqli_fetch_assoc($categories)) {
+                        echo '<a href="categories.php?category_id=' . htmlspecialchars($cat['id']) . '">' . htmlspecialchars($cat['name']) . '</a>';
+                    }
+                    ?>
+                </div>
+            </div>
+            <a href="cart.php">Cart</a>
+            <a href="aboutus_contactus.php">Contact Us</a>
+            <a href="account.php">Account</a>
+        </nav>
+    </header>
 
 <div class="container">
     <div class="product-details">
@@ -34,6 +59,8 @@ $product_data = mysqli_fetch_assoc($product);
         </form>
     </div>
 </div>
-
+    <footer>
+        <p>&copy; 2024 E-commerce Website Chad Wears. All rights reserved. | <a href="aboutus_contactus.php">About Us</a> | <a href="#">Privacy Policy</a></p>
+    </footer>
 </body>
 </html>

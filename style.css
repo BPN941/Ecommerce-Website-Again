@@ -143,14 +143,36 @@ header nav a {
   max-width: 1200px;
   text-align: center;
   flex: 1; /* Allow the container to grow and fill the available space */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 footer {
-  background-color: #f4f4f4;
-  padding: 10px 0;
+  background-color: #f8f9fa;
+  padding: 20px;
   text-align: center;
-  width: 100%; /* Ensure the footer takes the full width */
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #e7e7e7;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+footer p {
+  margin: 0;
+  color: #555;
+}
+
+footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 table {
@@ -183,6 +205,20 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+a.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+a.btn:hover {
+  background-color: #218838;
 }
 
 h1, h2 {
@@ -246,6 +282,7 @@ p {
   width: 200px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .product img.product-image {
@@ -320,4 +357,140 @@ p {
 
 .product-details .btn:hover {
   background-color: #0056b3;
+}
+
+/* Style for the quantity controls */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-controls button {
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+quantity-controls input {
+    width: 50px;
+    text-align: center;
+    margin: 0 5px;
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.quantity-controls input::-webkit-outer-spin-button,
+.quantity-controls input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Style for the remove button */
+.remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+    font-size: 16px;
+    padding: 0;
+}
+
+.remove-btn:hover {
+    color: darkred;
+}
+
+/* Style for the buttons */
+.product .btn {
+    display: inline-block;
+    margin-right: 10px; /* Add space between buttons */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product .btn:last-child {
+    margin-right: 0; /* Remove right margin for the last button */
+}
+
+.product .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Style for the form */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style for form groups */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Style for labels */
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Style for input fields */
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Style for the submit button */
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Style for the order summary */
+.order-summary {
+    margin-bottom: 20px;
+}
+
+.order-summary h3 {
+    margin-bottom: 10px;
+}
+
+.order-summary table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.order-summary table th,
+.order-summary table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.order-summary table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.total-amount {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: right;
 }

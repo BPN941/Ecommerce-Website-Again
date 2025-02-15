@@ -83,6 +83,8 @@ if (!$category_data) {
         <?php } ?>
     </div>
 </div>
-
+    <footer>
+        <p>&copy; 2024 E-commerce Website Chad Wears. All rights reserved. | <a href="aboutus_contactus.php">About Us</a> | <a href="#">Privacy Policy</a></p>
+    </footer>
 </body>
 </html>

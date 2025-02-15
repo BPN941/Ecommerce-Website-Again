@@ -159,6 +159,29 @@ if (isset($_POST['removeFromCart'])) {
     <meta charset="UTF-8">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .quantity-controls button {
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .quantity-controls input {
+            width: 50px;
+            text-align: center;
+            margin: 0 5px;
+            -moz-appearance: textfield; /* Firefox */
+        }
+        .quantity-controls input::-webkit-outer-spin-button,
+        .quantity-controls input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -209,7 +232,11 @@ if (isset($_POST['removeFromCart'])) {
                                 <td><?php echo htmlspecialchars($item['name']); ?></td>
                                 <td>Rs <?php echo htmlspecialchars($item['price']); ?></td>
                                 <td>
-                                    <input type="number" name="quantities[<?php echo htmlspecialchars($item['product_id']); ?>]" value="<?php echo htmlspecialchars($item['quantity']); ?>" min="1">
+                                    <div class="quantity-controls">
+                                        <button type="button" class="decrease-quantity" data-product-id="<?php echo htmlspecialchars($item['product_id']); ?>">-</button>
+                                        <input type="number" name="quantities[<?php echo htmlspecialchars($item['product_id']); ?>]" value="<?php echo htmlspecialchars($item['quantity']); ?>" min="1">
+                                        <button type="button" class="increase-quantity" data-product-id="<?php echo htmlspecialchars($item['product_id']); ?>">+</button>
+                                    </div>
                                 </td>
                                 <td>Rs <?php echo htmlspecialchars($item['price'] * $item['quantity']); ?></td>
                                 <td>
@@ -229,5 +256,27 @@ if (isset($_POST['removeFromCart'])) {
             <p>Your cart is empty.</p>
         <?php endif; ?>
     </div>
+    <script>
+        document.querySelectorAll('.decrease-quantity').forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product-id');
+                const input = document.querySelector(`input[name="quantities[${productId}]"]`);
+                if (input.value > 1) {
+                    input.value = parseInt(input.value) - 1;
+                }
+            });
+        });
+
+        document.querySelectorAll('.increase-quantity').forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product-id');
+                const input = document.querySelector(`input[name="quantities[${productId}]"]`);
+                input.value = parseInt(input.value) + 1;
+            });
+        });
+    </script>
+    <footer>
+        <p>&copy; 2024 E-commerce Website Chad Wears. All rights reserved. | <a href="aboutus_contactus.php">About Us</a> | <a href="#">Privacy Policy</a></p>
+    </footer>
 </body>
 </html>
