@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('connection.php');
+include('connection.php');
 
 // Check if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Store user information in session
             $_SESSION['auth'] = true; // Marks user as authenticated
+            $_SESSION['user_id'] = $row['id']; // Store user ID in session
             $_SESSION['username'] = $row['username'];
             $_SESSION['email'] = $row['email'];
             $_SESSION['role'] = $row['role'];

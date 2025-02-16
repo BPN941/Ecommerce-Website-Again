@@ -9,6 +9,10 @@ if (!isset($_SESSION['email'])) {
 }
 
 if (isset($_POST['placeOrder'])) {
+    if (!isset($_SESSION['user_id'])) {
+        die("User ID is not set in the session.");
+    }
+
     $user_id = $_SESSION['user_id'];
     $delivery_location = $_POST['delivery_location'];
     $phone_number = $_POST['phone_number'];
@@ -21,8 +25,12 @@ if (isset($_POST['placeOrder'])) {
     $query = "INSERT INTO orders (user_id, delivery_location, phone_number, total_price) VALUES ('$user_id', '$delivery_location', '$phone_number', '$total_price')";
     mysqli_query($conn, $query);
 
-    $_SESSION['cart'] = []; // Clear cart after order
-    echo "Order Placed Successfully!";
+    // Get the order ID
+    $order_id = mysqli_insert_id($conn);
+
+    // Redirect to Stripe payment page
+    header("Location: stripe_payment.php?order_id=$order_id&amount=$total_price");
+    exit();
 }
 ?>
 
