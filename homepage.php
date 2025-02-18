@@ -1,6 +1,10 @@
 <?php
 session_start();
 include('connection.php');
+
+// Fetch products from the database
+$query = "SELECT * FROM products";
+$products = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,59 +77,18 @@ include('connection.php');
         </div>
     </section>
     
-    <h2 class="products-title">Our Most Loved Products</h2>
+    <h2 class="products-title">Here are our Products</h2>
     <section id="products" class="products">
-    <div>
-        <div class="product">
-            <img src="images/product/tshirt/f9fc49aaf96fb9b232671e3a2b85d2a8.jpg" alt="Product Image">
-            <h3>Plain White T-shirt</h3>
-            <p>Rs 1200</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="images/product/tshirt/tshirt.png" alt="Product Image">
-            <h3>Plain White T-shirt</h3>
-            <p>Rs 3000</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="images/product/pants/black baggy jeans.png" alt="Product Image">
-            <h3>Black Jeans</h3>
-            <p>Rs 2100</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="images/product/pants/blue baggy jeans.png" alt="Product Image">
-            <h3>Blue Jeans</h3>
-            <p>Rs 2100</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="images/product/footware/white nike plain.png" alt="Product Image">
-            <h3>Product Title</h3>
-            <p>Rs 6000</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="images/product/tshirt/022215a0381a58204494dad100fc461c.jpg" alt="Product Image">
-            <h3>Brown Puffer Jacket</h3>
-            <p>Rs 3500</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="images/product/accessories/silver chain bracelet.png" alt="Product Image">
-            <h3>Product Title</h3>
-            <p>Rs 3000</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="images/product/accessories/vlack ring.png" alt="Product Image">
-            <h3>Product Title</h3>
-            <p>Rs 500</p>
-            <button>Add to Cart</button>
-        </div>
+    <div class="product-list">
+        <?php while ($product = mysqli_fetch_assoc($products)) { ?>
+            <div class="product-item">
+                <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="product-image">
+                <h3><?php echo htmlspecialchars($product['name']); ?></h3>
+                <p>Price: Rs <?php echo htmlspecialchars($product['price']); ?></p>
+                <a href="product-details.php?id=<?php echo htmlspecialchars($product['id']); ?>" class="btn">View Details</a>
+            </div>
+        <?php } ?>
     </div>
-        
     </section>
 
     <footer>
