@@ -39,7 +39,7 @@ if (!$user) {
 <head>
     <meta charset="UTF-8">
     <title>Order Confirmation</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- Add your CSS file -->
 </head>
 <body>
 
@@ -68,8 +68,11 @@ if (!$user) {
                 <th>Status</th>
                 <td><?php echo htmlspecialchars($order['status']); ?></td>
             </tr>
+            <tr>
+                <th>Order Date</th>
+                <td><?php echo htmlspecialchars($order['created_at']); ?></td>
+            </tr>
         </table>
-        <p>If you have any questions, please contact our customer support.</p>
         <a href="homepage.php" class="btn">Go to Home Page</a>
     </div>
 

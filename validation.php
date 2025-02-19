@@ -31,28 +31,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Passwords do not match.";
     }
 
-    // Hash the password
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    
-    // If no errors, insert the user into the database
-    if (empty($errors)) {
-        $sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
-        if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("sss", $uname, $pass, $Email);
-            if ($stmt->execute()) {
-                header("Location: login.php?registration=success");
-            } else {
-                echo "<p style='color:red;'>Error: " . $stmt->error . "</p>";
-            }
-            $stmt->close();
-        } else {
-            echo "<p style='color:red;'>Error: " . $conn->error . "</p>";
-        }
-    } else {
-        foreach ($errors as $error) {
-            echo "<p style='color:red;'>$error</p>";
-        }
+    // If there are errors, redirect back to the signup page with errors
+    if (!empty($errors)) {
+        $errorString = implode('&', array_map(function($error) {
+            return 'error[]=' . urlencode($error);
+        }, $errors));
+        header("Location: signup.php?$errorString");
+        exit();
     }
-}
 
+    // Hash the password
+    $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
+
+    // Insert user into the database
+    $sql = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 'user')";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $uname, $Email, $hashed_password);
+
+    if ($stmt->execute()) {
+        header("Location: login.php?registration=success");
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
+}
 ?>

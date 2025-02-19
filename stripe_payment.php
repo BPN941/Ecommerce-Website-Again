@@ -17,7 +17,7 @@ $session = \Stripe\Checkout\Session::create([
     'payment_method_types' => ['card'],
     'line_items' => [[
         'price_data' => [
-            'currency' => 'usd',
+            'currency' => 'npr',
             'product_data' => [
                 'name' => 'Order #' . $order_id,
             ],

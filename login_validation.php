@@ -30,8 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
 
-        // Check if password matches (plain text comparison or hashed)
-        if ($password === $row['password']) {  // Change to password_verify($password, $row['password']) if using hashed passwords
+        // Check if password matches (using password_verify)
+        if (password_verify($password, $row['password'])) {
 
             // Store user information in session
             $_SESSION['auth'] = true; // Marks user as authenticated
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Redirect based on role
             if ($row['role'] === 'admin') {
-                header("Location: admin/index.php");
+                header("Location: admin/orders.php");
             } else {
                 header("Location: homepage.php");
             }

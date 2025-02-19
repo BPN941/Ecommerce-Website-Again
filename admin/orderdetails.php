@@ -1,12 +1,16 @@
 <?php
-// filepath: /c:/xampp/htdocs/ecommerce/admin/orderdetails.php
-session_start();
-include('../connection.php');
+require_once 'includes/header.php'; // Include the header file
+require_once '../config/function.php'; // Include the function file
+require_once '../connection.php'; // Include the connection file
 
 // Check if the admin is logged in
 if (!isset($_SESSION['auth']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
     exit();
+}
+
+if (!isset($_GET['order_id'])) {
+    die("Order ID is not set in the URL.");
 }
 
 $order_id = $_GET['order_id'];
@@ -46,10 +50,62 @@ if (!$user) {
 <head>
     <meta charset="UTF-8">
     <title>Order Details</title>
-    <link rel="stylesheet" href="../styles.css"> <!-- Add your CSS file -->
+    <link rel="stylesheet" href="styles.css"> <!-- Add your CSS file -->
+    <style>
+        /* Internal CSS for table and button styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #fc7414;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #e05e00;
+        }
+    </style>
+    <!-- Navbar -->
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Order Details</li>
+          </ol>
+        </nav>
+      </div>
+    </nav>
+    <!-- End Navbar -->
 </head>
 <body>
-    <?php include('includes/navbar.php'); ?>
 
     <div class="container">
         <h2>Order Details</h2>
