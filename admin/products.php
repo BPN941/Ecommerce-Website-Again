@@ -4,7 +4,10 @@ require_once '../config/function.php'; // Include the function file
 require_once '../connection.php'; // Include the connection file
 
 // Check if admin is logged in
-$isAdmin = isset($_SESSION['auth']) && $_SESSION['role'] === 'admin';
+if (!isset($_SESSION['auth']) || $_SESSION['role'] !== 'admin') {
+    header("Location: login.php");
+    exit();
+}
 
 // Get category from URL if selected
 $category_id = isset($_GET['category']) ? intval($_GET['category']) : null;
@@ -51,66 +54,65 @@ if (!$products) {
     </nav>
     <!-- End Navbar -->
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4>
-                        Product Lists
-                        <a href="products-create.php" class="btn btn-primary float-end">Add Product</a>
-                    </h4>
-                </div>
-                <div class="card-body">
+    <div class="container mt-5">
+        <h4>Product Lists</h4>
+        <a href="products-create.php" class="btn btn-primary float-end mb-3">Add Product</a>
 
-                    <?= alertMessage(); ?>
+        <!-- Category Filter -->
+        <form method="GET" action="products.php" class="mb-3">
+            <label for="category">Filter by Category:</label>
+            <select name="category" id="category" class="form-select" onchange="this.form.submit()">
+                <option value="">All Categories</option>
+                <?php while ($row = mysqli_fetch_assoc($categories)) { ?>
+                    <option value="<?= htmlspecialchars($row['id']); ?>" <?= $category_id == $row['id'] ? 'selected' : ''; ?>>
+                        <?= htmlspecialchars($row['name']); ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </form>
 
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Category</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
-                            $products = getAll('products');
-                            if (mysqli_num_rows($products) > 0) {
-                                foreach ($products as $productItem) {
-                                    ?>
-                                    <tr>
-                                        <td><?= $productItem['id']; ?></td>
-                                        <td><?= $productItem['name']; ?></td>
-                                        <td><?= $productItem['price']; ?></td>
-                                        <td><?= $productItem['category_id']; ?></td>
-                                        <td>
-                                            <a href="products-edit.php?id=<?= $productItem['id']; ?>" class="btn btn-success btn-sm">Edit</a>
-                                            <a href="products-delete.php?id=<?= $productItem['id']; ?>" 
-                                                class="btn btn-danger btn-sm mx-2"
-                                                onclick="return confirm('Are you sure you want to delete this data?')"
-                                                >
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                            } else {
-                                ?>
-                                <tr>
-                                    <td colspan="7">No Record Found</td>
-                                </tr>
-                                <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                if (mysqli_num_rows($products) > 0) {
+                    while ($productItem = mysqli_fetch_assoc($products)) {
+                        ?>
+                        <tr>
+                            <td><?= htmlspecialchars($productItem['id']); ?></td>
+                            <td><?= htmlspecialchars($productItem['name']); ?></td>
+                            <td><?= htmlspecialchars($productItem['price']); ?></td>
+                            <td><?= htmlspecialchars($productItem['category_id']); ?></td>
+                            <td>
+                                <a href="products-edit.php?id=<?= htmlspecialchars($productItem['id']); ?>" class="btn btn-success btn-sm">Edit</a>
+                                <a href="products-delete.php?id=<?= htmlspecialchars($productItem['id']); ?>" 
+                                    class="btn btn-danger btn-sm mx-2"
+                                    onclick="return confirm('Are you sure you want to delete this data?')"
+                                    >
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                } else {
+                    ?>
+                    <tr>
+                        <td colspan="5">No Record Found</td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
 
     <?php include('includes/footer.php'); ?>
