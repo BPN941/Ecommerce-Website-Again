@@ -2,8 +2,8 @@
 session_start();
 include('../connection.php'); // Ensure correct connection
 
-if (isset($_POST['deleteProduct'])) {
-    $product_id = intval($_POST['product_id']);
+if (isset($_GET['id'])) {
+    $product_id = intval($_GET['id']);
 
     // Delete Product using prepared statement
     $stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
@@ -16,6 +16,10 @@ if (isset($_POST['deleteProduct'])) {
         $_SESSION['message'] = "Failed to delete product!";
     }
 
+    header("Location: products.php"); // Redirect back to the products page
+    exit();
+} else {
+    $_SESSION['message'] = "Invalid Product ID!";
     header("Location: products.php"); // Redirect back to the products page
     exit();
 }

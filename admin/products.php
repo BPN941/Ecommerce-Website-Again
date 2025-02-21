@@ -93,7 +93,7 @@ if (!$products) {
                             <td><?= htmlspecialchars($productItem['category_id']); ?></td>
                             <td>
                                 <a href="products-edit.php?id=<?= htmlspecialchars($productItem['id']); ?>" class="btn btn-success btn-sm">Edit</a>
-                                <a href="products-delete.php?id=<?= htmlspecialchars($productItem['id']); ?>" 
+                                <a href="delete_product.php?id=<?= htmlspecialchars($productItem['id']); ?>" 
                                     class="btn btn-danger btn-sm mx-2"
                                     onclick="return confirm('Are you sure you want to delete this data?')"
                                     >
